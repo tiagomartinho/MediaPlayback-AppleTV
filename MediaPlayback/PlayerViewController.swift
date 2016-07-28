@@ -12,11 +12,11 @@ class PlayerViewController: AVPlayerViewController {
 
         if let mediaURL = NSURL(string: "http://cdn.ebound.tv/tv/masalatv/chunks.m3u8") {
             playerItem = AVPlayerItem(URL: mediaURL)
+            playerItem?.addObserver(self, forKeyPath: kStatusKey, options: [.New, .Initial], context: nil)
             if let playerItem = playerItem {
                 self.player = AVPlayer(playerItem: playerItem)
                 self.player?.play()
             }
-            playerItem?.addObserver(self, forKeyPath: kStatusKey, options: .New, context: nil)
             self.videoGravity = AVLayerVideoGravityResizeAspectFill
         }
 
