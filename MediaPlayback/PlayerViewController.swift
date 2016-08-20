@@ -10,7 +10,7 @@ class PlayerViewController: AVPlayerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let mediaURL = NSURL(string: "http://cdn.ebound.tv/tv/masalatv/chunks.m3u8") {
+        if let mediaURL = NSURL(string: "http://rtp-pull-live.hls.adaptive.level3.net:80/liverepeater/rtp1.smil/chunklist_b600000_slpt.m3u8") {
             playerItem = AVPlayerItem(URL: mediaURL)
             playerItem?.addObserver(self, forKeyPath: kStatusKey, options: [.New, .Initial], context: nil)
             if let playerItem = playerItem {
@@ -39,6 +39,8 @@ class PlayerViewController: AVPlayerViewController {
     }
 
     internal override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+
+        print("observeValueForKeyPath")
 
         if keyPath == kStatusKey, let playerItem = object as? AVPlayerItem {
 
